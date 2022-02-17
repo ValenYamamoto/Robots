@@ -1,0 +1,8 @@
+prefix=/home/valen/py3_ws/devel
+
+Name: actionlib_tut
+Description: Description of actionlib_tut
+Version: 0.0.0
+Cflags: -I/home/valen/py3_ws/devel/include
+Libs: -L${prefix}/lib 
+Requires: actionlib_msgs

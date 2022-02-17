@@ -1,0 +1,30 @@
+<launch>
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find fetch_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" />
+
+  <arg name="robot" default="fetch"/>
+  <arg name="debug" default="false"/>
+  <arg name="gui" default="false"/>
+  <arg name="headless" default="false"/>
+
+  <!-- Start Gazebo with a blank world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="world_name" value="contact.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+  </include>
+
+
+  <!-- Oh, you wanted a robot? -->
+  <include file="$(find train_fetch)/launch/include/$(arg robot).launch.xml">
+    <arg name="x" value="0" /> 
+    <arg name="y" value="0" /> 
+    <arg name="z" value="0" /> 
+  </include>
+
+  <node name="spawn_box" pkg="train_fetch" type="spawn_test.py" />
+
+</launch>
