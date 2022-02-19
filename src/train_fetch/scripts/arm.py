@@ -2,9 +2,11 @@
 import rospy
 
 import actionlib
+import datetime
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from control_msgs.msg import FollowJointTrajectoryAction
 from control_msgs.msg import FollowJointTrajectoryGoal
+from control_msgs.msg import JointTolerance
 from actionlib_msgs.msg import GoalStatus
 from gazebo_msgs.msg import ContactsState
 
@@ -34,14 +36,15 @@ class ArmController:
                                 break
         
         def send_arm_goal(self, joint_points, previous=None ):
-                duration = 0
+                duration = 1
                 if previous is not None:
                         diff = [ abs(x-y) for x, y in zip( joint_points, previous ) ]
                         if max( diff ) > 1:
-                                duration = 2
+                                duration = 3
                 #rospy.loginfo( "Waiting for action server" )
                 self.client.wait_for_server()
                 #rospy.loginfo( "Connected to action server" )
+                time_limit = 2+duration-1
 
                 traj = JointTrajectory()
                 traj.joint_names = self._joint_names
@@ -53,14 +56,30 @@ class ArmController:
 
                 traj_pos_goal = FollowJointTrajectoryGoal() 
                 traj_pos_goal.trajectory = traj
+                if previous is not None:
+                        pos_tol = [ 0.1*abs(x-y) for x, y in zip( joint_points, previous ) ]
+                        tolerances = []
+                        for i, name in enumerate( self._joint_names ):
+                                j = JointTolerance()
+                                j.name = name
+                                j.position = pos_tol[i]
+                                j.velocity = 5
+                                j.acceleration = 5
+                                tolerances.append( j )
+                        traj_pos_goal.goal_tolerance = tolerances 
 
                 traj_pos_goal.goal_time_tolerance = rospy.Duration( duration )
                 #rospy.loginfo( "Sent goal successfully" )
                 #rospy.loginfo( "State:" + self.status_string( self.client.get_state() ) )
                 self.client.send_goal( traj_pos_goal )
+                time_start = rospy.Time.now()
+                #print( "TIME LIMIT:", time_limit )
 
                 self.CONTACT_MADE = False
                 while self.client.get_state() not in [GoalStatus.SUCCEEDED, GoalStatus.ABORTED]:
+                        if (rospy.Time.now() - time_start).to_sec() > time_limit:
+                                self.client.cancel_all_goals()
+                                return 3
                         if self.CONTACT_MADE == True:
                                 self.client.cancel_all_goals()
                                 self.CONTACT_MADE = False

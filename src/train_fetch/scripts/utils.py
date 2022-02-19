@@ -25,6 +25,8 @@ joint_names = {name:index for index, name in enumerate( joint_names ) }
 def delete_model( model_name='contact_box' ):
         os.system( "gz model -m contact_box -d" )
 
+def move_model( pose=(0.75, 0, 0) ):
+        os.system( f"gz model -m contact_box -x {pose[0]} -y {pose[1]} -z {pose[2]} -R 0 -P 0 -Y 0" )
 
 def spawn_model( model_name='contact_box', pose=(0.75, 0, 0) ):
         initial_pose = Pose()

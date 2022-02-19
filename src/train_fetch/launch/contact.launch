@@ -25,6 +25,4 @@
     <arg name="z" value="0" /> 
   </include>
 
-  <node name="spawn_box" pkg="train_fetch" type="spawn_test.py" />
-
 </launch>

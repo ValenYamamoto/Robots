@@ -25,7 +25,7 @@ STEPS_PER_ITER = 6
 GAMMA = 0.99
 LAMBDA = 0.95
 CRITIC_DISCOUNT = 0.5
-ENTROPY_BETA = 100
+ENTROPY_BETA = 75
 CLIPPING_VALUE = 0.2
 
 INITIAL_ARM_POSITION = [-1.57, 0.9, -1.57, -1, 0, 0, 0]
@@ -128,8 +128,8 @@ def ppo_loop():
 
                 model_actor = ActorModel( NUM_JOINTS, OUTPUT_DIMS ).double()
                 model_critic = CriticModel( NUM_JOINTS ).double()
-                model_actor.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0216-1429/actor10' ) )
-                model_critic.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0216-1429/critic10' ) )
+                model_actor.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0216-2205/actor5' ) )
+                model_critic.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0216-2205/critic5' ) )
                 critic_mse = torch.nn.MSELoss()
                 actor_optimizer = torch.optim.Adam( model_actor.parameters(), lr=5e-5 )
                 critic_optimizer = torch.optim.Adam( model_critic.parameters(), lr=1e-3 )
@@ -142,18 +142,6 @@ def ppo_loop():
                                                 torch.save( model_critic.state_dict(), f"/home/valen/py3_ws/src/train_fetch/saved_models/critic{epoch}" )
                                 states, actions, entropies, action_probs, values, masks, rewards, probs = [], [], [], [], [], [], [], []
                                 for it in range( PPO_STEPS ):
-                                                isBoxInPosition = utils.get_box_position( link_data )
-                                                if isBoxInPosition == 7 and not any( "contact_box" in name for name in link_data.name ):
-                                                                utils.spawn_model()
-                                                if not isBoxInPosition:
-                                                                utils.delete_model()
-                                                                arm_controller.send_arm_goal( [0, 0, 0, 0, 0, 0, 0] )
-                                                                utils.reset_world()
-                                                                arm_controller.send_arm_goal( INITIAL_ARM_POSITION )
-                                                                utils.spawn_model()
-                                                                current_state = np.array( INITIAL_ARM_POSITION )
-                                                                if rewards:
-                                                                                rewards[-1] = CONTACT_REWARD
                                                 log_string = f"epoch: {epoch}, step: {it}\n"
                                                 print( "epoch:", epoch, " step:", it )
                                                 current_state_tensor = torch.tensor( current_state.reshape( (1, NUM_JOINTS) ) )
@@ -219,11 +207,13 @@ def ppo_loop():
                                                 if done:
                                                                 #pass
                                                                 rospy.loginfo( "Resetting" )
-                                                                utils.delete_model()
+                                                                #utils.delete_model()
+                                                                utils.move_model( (0, 0, 3) )
                                                                 arm_controller.send_arm_goal( [0, 0, 0, 0, 0, 0, 0] )
                                                                 utils.reset_world()
                                                                 arm_controller.send_arm_goal( INITIAL_ARM_POSITION )
-                                                                utils.spawn_model()
+                                                                #utils.spawn_model()
+                                                                utils.move_model( )
                                                                 current_state = np.array( INITIAL_ARM_POSITION )
                                                 open_file = utils.get_logfile( logfilename )
                                                 open_file.write( log_string )
