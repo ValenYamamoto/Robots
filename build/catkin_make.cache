@@ -1,0 +1,2 @@
+actionlib_tutorials:move_base
+-DCATKIN_DEVEL_PREFIX=/home/valen/py3_ws/devel -DCMAKE_INSTALL_PREFIX=/home/valen/py3_ws/install -G Unix Makefiles

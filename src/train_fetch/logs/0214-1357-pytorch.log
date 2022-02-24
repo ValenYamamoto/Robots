@@ -1,0 +1,5 @@
+epoch: 0, step: 0
+	action: tensor([[-0.0124, -0.0412,  0.0375, -0.0664,  0.0083, -0.0037,  0.0106]],
+       dtype=torch.float64)
+	q_value: tensor([[0.0767]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.2097688553086211, distance: 1.0172642081001766 entropy -16.333605295423492

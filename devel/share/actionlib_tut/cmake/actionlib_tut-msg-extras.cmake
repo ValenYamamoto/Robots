@@ -1,0 +1,2 @@
+set(actionlib_tut_MESSAGE_FILES "/home/valen/py3_ws/devel/share/actionlib_tut/msg/FibonacciAction.msg;/home/valen/py3_ws/devel/share/actionlib_tut/msg/FibonacciActionGoal.msg;/home/valen/py3_ws/devel/share/actionlib_tut/msg/FibonacciActionResult.msg;/home/valen/py3_ws/devel/share/actionlib_tut/msg/FibonacciActionFeedback.msg;/home/valen/py3_ws/devel/share/actionlib_tut/msg/FibonacciGoal.msg;/home/valen/py3_ws/devel/share/actionlib_tut/msg/FibonacciResult.msg;/home/valen/py3_ws/devel/share/actionlib_tut/msg/FibonacciFeedback.msg")
+set(actionlib_tut_SERVICE_FILES "")
