@@ -4,6 +4,8 @@ import rospy
 from geometry_msgs.msg import Pose
 from gazebo_msgs.srv import DeleteModel
 from gazebo_msgs.srv import SpawnModel
+from gazebo_msgs.msg import ModelState
+from gazebo_msgs.srv import SetModelState
 from std_srvs.srv import Empty
 from datetime import datetime
 
@@ -25,8 +27,22 @@ joint_names = {name:index for index, name in enumerate( joint_names ) }
 def delete_model( model_name='contact_box' ):
         os.system( "gz model -m contact_box -d" )
 
-def move_model( pose=(0.75, 0, 0) ):
-        os.system( f"gz model -m contact_box -x {pose[0]} -y {pose[1]} -z {pose[2]} -R 0 -P 0 -Y 0" )
+def move_model( proxy, pose=(0.75, 0, 0) ):
+        #os.system( f"gz model -m contact_box -x {pose[0]} -y {pose[1]} -z {pose[2]} -R 0 -P 0 -Y 0" )
+        msg = move_model_msg( "contact_box", pose=pose )
+        proxy( msg )
+
+def move_model_msg( name, pose=(0, 0, 0), orientation=(0, 0, 0, 0)):
+        state_msg = ModelState()
+        state_msg.model_name = name 
+        state_msg.pose.position.x = pose[0];
+        state_msg.pose.position.y = pose[1];
+        state_msg.pose.position.z = pose[2];
+        state_msg.pose.orientation.x = orientation[0];
+        state_msg.pose.orientation.y = orientation[1];
+        state_msg.pose.orientation.z = orientation[2];
+        state_msg.pose.orientation.w = orientation[3];
+        return state_msg
 
 def spawn_model( model_name='contact_box', pose=(0.75, 0, 0) ):
         initial_pose = Pose()
@@ -42,9 +58,14 @@ def spawn_model( model_name='contact_box', pose=(0.75, 0, 0) ):
         spawn_model_prox = rospy.ServiceProxy( 'gazebo/spawn_sdf_model', SpawnModel )
         spawn_model_prox( 'contact_box', model_xml, '', initial_pose, 'world' )
 
-def reset_world():
+def reset_world( proxy ):
+        """
         reset_simulation = rospy.ServiceProxy( '/gazebo/reset_world', Empty )
         reset_simulation()
+        """
+        msg = move_model_msg( "fetch" )
+        proxy( msg )
+        #os.system( f"gz model -m fetch -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0" )
 
 def get_gripper_pos( data ):
         pos = []

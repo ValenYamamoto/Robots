@@ -4,6 +4,8 @@ import sys
 import rospy
 from sensor_msgs.msg import JointState
 from gazebo_msgs.msg import LinkStates
+from gazebo_msgs.msg import ModelState
+from gazebo_msgs.srv import SetModelState
 
 import torch
 import torch.nn.functional as F
@@ -25,7 +27,7 @@ STEPS_PER_ITER = 6
 GAMMA = 0.99
 LAMBDA = 0.95
 CRITIC_DISCOUNT = 0.5
-ENTROPY_BETA = 75
+ENTROPY_BETA = 5
 CLIPPING_VALUE = 0.2
 
 INITIAL_ARM_POSITION = [-1.57, 0.9, -1.57, -1, 0, 0, 0]
@@ -118,6 +120,9 @@ def reward_function( distance ):
 def ppo_loop():
                 rospy.Subscriber( "/joint_states", JointState, joint_position_interrupt )
                 rospy.Subscriber( "/gazebo/link_states", LinkStates, link_position_interrupt )
+                rospy.wait_for_service( '/gazebo/set_model_state' )
+                move_model = rospy.ServiceProxy( '/gazebo/set_model_state', SetModelState )
+
                 arm_controller = ArmController()
                 logfilename = utils.get_logfilename()
 
@@ -128,8 +133,8 @@ def ppo_loop():
 
                 model_actor = ActorModel( NUM_JOINTS, OUTPUT_DIMS ).double()
                 model_critic = CriticModel( NUM_JOINTS ).double()
-                model_actor.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0216-2205/actor5' ) )
-                model_critic.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0216-2205/critic5' ) )
+                model_actor.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0223-1932/actor15' ) )
+                model_critic.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0223-1932/critic15' ) )
                 critic_mse = torch.nn.MSELoss()
                 actor_optimizer = torch.optim.Adam( model_actor.parameters(), lr=5e-5 )
                 critic_optimizer = torch.optim.Adam( model_critic.parameters(), lr=1e-3 )
@@ -208,12 +213,12 @@ def ppo_loop():
                                                                 #pass
                                                                 rospy.loginfo( "Resetting" )
                                                                 #utils.delete_model()
-                                                                utils.move_model( (0, 0, 3) )
+                                                                utils.move_model( move_model, (0, 0, 3) )
                                                                 arm_controller.send_arm_goal( [0, 0, 0, 0, 0, 0, 0] )
-                                                                utils.reset_world()
+                                                                utils.reset_world( move_model )
                                                                 arm_controller.send_arm_goal( INITIAL_ARM_POSITION )
                                                                 #utils.spawn_model()
-                                                                utils.move_model( )
+                                                                utils.move_model( move_model )
                                                                 current_state = np.array( INITIAL_ARM_POSITION )
                                                 open_file = utils.get_logfile( logfilename )
                                                 open_file.write( log_string )
