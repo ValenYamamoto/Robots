@@ -15,6 +15,11 @@ from arm import ArmController
 
 import utils
 
+ACTOR_FILE = '/home/valen/py3_ws/src/train_fetch/saved_models/0223-1932/actor15' 
+CRITIC_FILE = '/home/valen/py3_ws/src/train_fetch/saved_models/0223-1932/critic15' 
+
+ACTOR_LR = 5e-5
+CRITIC_LR = 1e-3
 
 CONTACT_REWARD = -50
 
@@ -133,11 +138,12 @@ def ppo_loop():
 
                 model_actor = ActorModel( NUM_JOINTS, OUTPUT_DIMS ).double()
                 model_critic = CriticModel( NUM_JOINTS ).double()
-                model_actor.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0223-1932/actor15' ) )
-                model_critic.load_state_dict( torch.load( '/home/valen/py3_ws/src/train_fetch/saved_models/0223-1932/critic15' ) )
+                if ACTOR_FILE:
+                            model_actor.load_state_dict( torch.load( ACTOR_FILE ) )
+                            model_critic.load_state_dict( torch.load( CRITIC_FILE ) )
                 critic_mse = torch.nn.MSELoss()
-                actor_optimizer = torch.optim.Adam( model_actor.parameters(), lr=5e-5 )
-                critic_optimizer = torch.optim.Adam( model_critic.parameters(), lr=1e-3 )
+                actor_optimizer = torch.optim.Adam( model_actor.parameters(), lr=ACTOR_LR )
+                critic_optimizer = torch.optim.Adam( model_critic.parameters(), lr=CRITIC_LR )
 
                 #current_state = np.ones( 7 )
                 current_state = utils.get_joint_data( joint_data ) 

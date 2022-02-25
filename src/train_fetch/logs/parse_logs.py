@@ -1,6 +1,8 @@
 import sys
 import pandas
 import argparse
+import torch
+from torch import tensor
 
 
 def parse_rewards( f ):
@@ -49,6 +51,34 @@ epoch: 0, step: 0
 	reward: 0.338445123740281, distance: 0.9307641144358516 entropy -4.612273175343211
 LOSS epoch 0 actor 0.14302722137766102 critic 11.563734072513316
 """
+def create_action_df( f ):
+    action_avg = []
+    epochs = []
+    collisions = []
+    for line in f:
+        if line.startswith( "epoch" ):
+            epoch = int( line.split()[1][:-1] )
+            action1 = next( f ).lstrip()[8:] # action
+            action2 = next( f ) # action
+            total_str = action1.rstrip() + action2.rstrip()
+            ten = eval( total_str )
+            avg = torch.mean( ten ).item()
+            next( f )
+            collision = next( f )
+            if collision.lstrip().startswith( "COLLI" ):
+                collisions.append( 1 )
+            else:
+                collisions.append( 0 )
+            epochs.append( epoch )
+            action_avg.append( avg )
+            #print( avg )
+    dic = {
+            "epoch": epochs,
+            "action average" : action_avg,
+            "collision" : collisions
+    }
+    return pandas.DataFrame.from_dict( dic )
+
 def create_df( f ):
     current_epoch = -1
     avg_q_values = []
@@ -134,6 +164,7 @@ if __name__ == "__main__":
     parser.add_argument( '-s', '--stats', action='store_true' )
     parser.add_argument( '-df', '--dataframe', action='store_true' )
     parser.add_argument( '-p', '--print', action='store_true' )
+    parser.add_argument( '-a', '--action', action='store_true' )
     args = parser.parse_args()
     filename = args.filename 
     if args.stats:
@@ -152,5 +183,10 @@ if __name__ == "__main__":
         with open( filename ) as f:
             df = create_df( f )
         df.to_pickle( filename[:-4]+".p" )
+    if args.action:
+        with open( filename ) as f:
+            df = create_action_df( f )
+        df.to_pickle( filename[:-4]+"-action.p" )
+
 
             
