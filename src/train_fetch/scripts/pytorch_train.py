@@ -15,8 +15,8 @@ from arm import ArmController
 
 import utils
 
-ACTOR_FILE = '/home/valen/py3_ws/src/train_fetch/saved_models/0223-1932/actor15' 
-CRITIC_FILE = '/home/valen/py3_ws/src/train_fetch/saved_models/0223-1932/critic15' 
+ACTOR_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0223-1932/actor15' 
+CRITIC_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0223-1932/critic15' 
 
 ACTOR_LR = 5e-5
 CRITIC_LR = 1e-3
@@ -149,8 +149,8 @@ def ppo_loop():
                 current_state = utils.get_joint_data( joint_data ) 
                 for epoch in range( NUM_EPOCHS ):
                                 if epoch != 0 and epoch % 5 == 0:
-                                                torch.save( model_actor.state_dict(), f"/home/valen/py3_ws/src/train_fetch/saved_models/actor{epoch}" )
-                                                torch.save( model_critic.state_dict(), f"/home/valen/py3_ws/src/train_fetch/saved_models/critic{epoch}" )
+                                                torch.save( model_actor.state_dict(), f"/home/simulator/Robots/src/train_fetch/saved_models/actor{epoch}" )
+                                                torch.save( model_critic.state_dict(), f"/home/simulator/Robots/src/train_fetch/saved_models/critic{epoch}" )
                                 states, actions, entropies, action_probs, values, masks, rewards, probs = [], [], [], [], [], [], [], []
                                 for it in range( PPO_STEPS ):
                                                 log_string = f"epoch: {epoch}, step: {it}\n"

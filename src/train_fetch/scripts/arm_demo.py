@@ -18,7 +18,7 @@ def delete_model( model_name='contact_box' ):
 	delete_model_prox = rospy.ServiceProxy( 'gazebo/delete_model', DeleteModel )
 	delete_model_prox( model_name )
 
-model_path = '/home/valen/py3_ws/src/train_fetch/models/'
+model_path = '/home/simulator/Robots/src/train_fetch/models/'
 
 def spawn_model( model_name='contact_box', pose=(0.75, 0, 0) ):
 	initial_pose = Pose()
