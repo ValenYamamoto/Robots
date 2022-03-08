@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
 import sys
+
 import rospy
+from arm import ArmController
 from sensor_msgs.msg import JointState
 from gazebo_msgs.msg import LinkStates
 from gazebo_msgs.msg import ModelState
@@ -10,15 +12,17 @@ from gazebo_msgs.srv import SetModelState
 import torch
 import torch.nn.functional as F
 
+from models import ActorModel, CriticModel
+
 import numpy as np
-from arm import ArmController
 
 import utils
 
-ACTOR_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0223-1932/actor15' 
-CRITIC_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0223-1932/critic15' 
+ACTOR_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0307-1750/actor5' 
+CRITIC_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0307-1750/critic5' 
+ACTOR_FILE = None
 
-ACTOR_LR = 5e-5
+ACTOR_LR = 5e-3
 CRITIC_LR = 1e-3
 
 CONTACT_REWARD = -50
@@ -51,41 +55,6 @@ def joint_position_interrupt( data ):
                 joint_data = data
 
 
-class ActorModel( torch.nn.Module ):
-                def __init__( self, input_dims, output_dims, hidden_dims=1024 ):
-                                super( ActorModel, self ).__init__()
-                                self.linear1 = torch.nn.Linear( input_dims, hidden_dims )
-                                self.linear2 = torch.nn.Linear( hidden_dims, hidden_dims )
-                                self.linear3 = torch.nn.Linear( hidden_dims, hidden_dims )
-                                self.linear4 = torch.nn.Linear( hidden_dims, hidden_dims )
-                                self.mu = torch.nn.Linear( hidden_dims, output_dims )
-                                self.sigma = torch.nn.Linear( hidden_dims, output_dims )
-
-                def forward( self, x ):
-                                mid = F.relu( self.linear1( x ) )
-                                mid = F.relu( self.linear2( mid ) )
-                                mid = F.relu( self.linear3( mid ) )
-                                mid = F.relu( self.linear4( mid ) )
-                                mean = self.mu( mid )
-                                sigma = torch.clamp( self.sigma( mid ), min=1e-10 )
-                                return mean, sigma
-
-                def getDistribution( self, x ):
-                                mu, sigma = self.forward( x )
-                                dist = torch.distributions.Normal( mu, sigma )
-                                return dist
-
-class CriticModel( torch.nn.Module ):
-                def __init__( self, input_dims, hidden_dims=100 ):
-                                super( CriticModel, self ).__init__()
-                                self.linear1 = torch.nn.Linear( input_dims, hidden_dims )
-                                self.linear2 = torch.nn.Linear( hidden_dims, hidden_dims )
-                                self.linear3 = torch.nn.Linear( hidden_dims, hidden_dims )
-                                self.outputLinear = torch.nn.Linear( hidden_dims, 1 )
-
-                def forward( self, x ):
-                                return  self.outputLinear( F.relu( self.linear3( F.relu( self.linear2( F.relu( self.linear1( x ) ) ) ) )  ) )
-
 def distance_from_goal( current, goal, tol=1e-1 ):
                 d = distance(current, goal )
                 return d, abs( d ) < tol
@@ -116,8 +85,22 @@ def ppo_loss( action_probs, probs, entropies, advantages, rewards, values ):
                 actor_loss = -torch.mean( torch.min( p1, p2 ) )
                 critic_loss = torch.mean( torch.square( rewards - values ) )
                 entropy = torch.mean( entropies )
-                total_loss = CRITIC_DISCOUNT*critic_loss + actor_loss - ENTROPY_BETA * entropy
+                global ENTROPY_BETA
+                total_loss = CRITIC_DISCOUNT*critic_loss + actor_loss
+                ENTROPY_BETA = choose_beta( total_loss )
+                total_loss = total_loss - ENTROPY_BETA * entropy
                 return total_loss
+
+def choose_beta( raw_loss ):
+                if raw_loss > 500:
+                                return 100
+                elif raw_loss > 200:
+                                return 50
+                elif raw_loss > 100:
+                                return 5
+                elif raw_loss > 10:
+                                return 0.1
+                return 00.01
 
 def reward_function( distance ):
                 return 1- ((distance / INITIAL_DISTANCE) **2 )
@@ -157,11 +140,13 @@ def ppo_loop():
                                                 print( "epoch:", epoch, " step:", it )
                                                 current_state_tensor = torch.tensor( current_state.reshape( (1, NUM_JOINTS) ) )
                                                 mu, sigma = model_actor( current_state_tensor )
+
                                                 #print( "mu:", mu )
                                                 dist = model_actor.getDistribution( current_state_tensor )
                                                 action = dist.sample()
+                                                action = torch.clamp( action, min=-6.28, max=6.18 )
                                                 action_prob = dist.log_prob( action )
-                                                print( "action:", action )
+                                                #print( "action:", action )
                                                 log_string += f"\taction: {action}\n"
                                                 prob = dist.log_prob( mu )
                                                 entropy = dist.entropy()
@@ -196,11 +181,22 @@ def ppo_loop():
                                                                             reward = 100
                                                 else:
                                                                 reward,done = CONTACT_REWARD, True
-                                                                print( "MOVE RESULT:", move_result )
-                                                                log_string += f"\tCOLLISION\n"
+                                                                #print( "MOVE RESULT:", move_result )
+                                                                pos_tol = [ max( 0.05, 0.2*abs(x-y).item() ) for x, y in zip( action[0], current_state ) ]
+                                                                diff = [ abs(x-y).item() for x, y in zip( action[0], new_state ) ]
+                                                                if( move_result == 1 or any( x > y for x, y in zip( diff, pos_tol ) ) ):
+                                                                            reward,done = CONTACT_REWARD, True
+                                                                            log_string += f"\tCOLLISION\n"
+                                                                else:
+                                                                            distance, done = distance_from_goal( new_state_grip_pos, GRIPPER_GOAL )
+                                                                            if not done:
+                                                                                        reward = reward_function( distance )
+                                                                            else:
+                                                                                        reward = 100
+                                                                        
 
                                                 mask = not done
-                                                print( "reward:", reward, " distance:", distance )
+                                                #print( "reward:", reward, " distance:", distance )
                                                 log_string += f"\treward: {reward}, distance: {distance} entropy {torch.mean(entropy).item()}\n"
 
                                                 states.append( current_state_tensor )
@@ -221,8 +217,8 @@ def ppo_loop():
                                                                 #utils.delete_model()
                                                                 utils.move_model( move_model, (0, 0, 3) )
                                                                 arm_controller.send_arm_goal( [0, 0, 0, 0, 0, 0, 0] )
-                                                                utils.reset_world( move_model )
                                                                 arm_controller.send_arm_goal( INITIAL_ARM_POSITION )
+                                                                utils.reset_world( move_model )
                                                                 #utils.spawn_model()
                                                                 utils.move_model( move_model )
                                                                 current_state = np.array( INITIAL_ARM_POSITION )
@@ -264,7 +260,7 @@ def ppo_loop():
                                 actor_optimizer.zero_grad()
                                 critic_optimizer.zero_grad()
                                 loss = ppo_loss( action_probs, probs, entropies, advantages, rewards, values )
-                                print( "actor loss", loss )
+                                #print( "actor loss", loss )
                                 loss.backward(retain_graph=True)
                                 actor_optimizer.step()
 
@@ -274,10 +270,10 @@ def ppo_loop():
                                 print( "returns", returns )
                                 print( "values", values )
                                 """
-                                print( "critic loss", critic_loss )
+                                #print( "critic loss", critic_loss )
 
                                 open_file = utils.get_logfile( logfilename )
-                                log_string = f'LOSS epoch {epoch} actor {loss.item()} critic {critic_loss.item()}\n'
+                                log_string = f'LOSS epoch {epoch} actor {loss.item()} critic {critic_loss.item()} entropy {ENTROPY_BETA}\n'
                                 open_file.write( log_string )
                                 open_file.close()
 
@@ -285,7 +281,7 @@ def ppo_loop():
                                 for _ in range( STEPS_PER_ITER ):
                                                 actor_optimizer.step()
                                                 critic_optimizer.step()
-                                print( "****************************************")
+                                #print( "****************************************")
 
                                                 
 

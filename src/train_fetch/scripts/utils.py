@@ -13,7 +13,7 @@ import os
 
 import numpy as np
 
-model_path = '/home/valen/py3_ws/src/train_fetch/models/'
+model_path = '/home/simulator/Robots/src/train_fetch/models/'
 
 joint_names = ['shoulder_pan_joint',
                     'shoulder_lift_joint',
@@ -30,7 +30,7 @@ def delete_model( model_name='contact_box' ):
 def move_model( proxy, pose=(0.75, 0, 0) ):
         #os.system( f"gz model -m contact_box -x {pose[0]} -y {pose[1]} -z {pose[2]} -R 0 -P 0 -Y 0" )
         msg = move_model_msg( "contact_box", pose=pose )
-        proxy( msg )
+        return proxy( msg )
 
 def move_model_msg( name, pose=(0, 0, 0), orientation=(0, 0, 0, 0)):
         state_msg = ModelState()
@@ -103,7 +103,7 @@ def set_arm( arm_controller, initial_pos ):
 def get_logfilename():
         now = datetime.now()
         dt_string = now.strftime("%m%d-%H%M")
-        name = "/home/valen/py3_ws/src/train_fetch/logs/" + dt_string+"-pytorch.log"
+        name = "/home/simulator/Robots/src/train_fetch/logs/" + dt_string+"-pytorch.log"
         return name
         
 def get_logfile(name):

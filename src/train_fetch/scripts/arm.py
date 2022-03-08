@@ -37,6 +37,7 @@ class ArmController:
         
         def send_arm_goal(self, joint_points, previous=None ):
                 duration = 1
+                usual_time_limit = 4
                 if previous is not None:
                         diff = [ abs(x-y) for x, y in zip( joint_points, previous ) ]
                         if max( diff ) > 1:
@@ -44,7 +45,7 @@ class ArmController:
                 #rospy.loginfo( "Waiting for action server" )
                 self.client.wait_for_server()
                 #rospy.loginfo( "Connected to action server" )
-                time_limit = 2+duration-1
+                time_limit = usual_time_limit+duration-1
 
                 traj = JointTrajectory()
                 traj.joint_names = self._joint_names
@@ -52,22 +53,25 @@ class ArmController:
                 traj.points[0].positions = joint_points
                 traj.points[0].velocities =  [0.0] * len(joint_points)
                 traj.points[0].accelerations = [0.0] * len(joint_points)
-                traj.points[0].time_from_start = rospy.Duration( 2 )
+                traj.points[0].time_from_start = rospy.Duration( usual_time_limit )
 
                 traj_pos_goal = FollowJointTrajectoryGoal() 
                 traj_pos_goal.trajectory = traj
+                """
+                pos_tol = []
                 if previous is not None:
-                        pos_tol = [ 0.1*abs(x-y) for x, y in zip( joint_points, previous ) ]
+                        pos_tol = [ max( (0.1*abs(x-y)).item(), 0.05 ) for x, y in zip( joint_points, previous ) ]
                         tolerances = []
                         for i, name in enumerate( self._joint_names ):
                                 j = JointTolerance()
                                 j.name = name
                                 j.position = pos_tol[i]
-                                j.velocity = 5
-                                j.acceleration = 5
+                                j.velocity = 100
+                                j.acceleration = 100
                                 tolerances.append( j )
                         traj_pos_goal.goal_tolerance = tolerances 
 
+                """
                 traj_pos_goal.goal_time_tolerance = rospy.Duration( duration )
                 #rospy.loginfo( "Sent goal successfully" )
                 #rospy.loginfo( "State:" + self.status_string( self.client.get_state() ) )
