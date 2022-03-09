@@ -22,7 +22,7 @@ ACTOR_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0307-1750/acto
 CRITIC_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0307-1750/critic5' 
 ACTOR_FILE = None
 
-ACTOR_LR = 5e-3
+ACTOR_LR = 5e-4
 CRITIC_LR = 1e-3
 
 CONTACT_REWARD = -50
@@ -38,6 +38,7 @@ LAMBDA = 0.95
 CRITIC_DISCOUNT = 0.5
 ENTROPY_BETA = 5
 CLIPPING_VALUE = 0.2
+ITER_PER_EP=32
 
 INITIAL_ARM_POSITION = [-1.57, 0.9, -1.57, -1, 0, 0, 0]
 GRIPPER_GOAL = (0.56033, 0.6330974, 0.295395)
@@ -106,17 +107,19 @@ def reward_function( distance ):
                 return 1- ((distance / INITIAL_DISTANCE) **2 )
 
 def ppo_loop():
-                rospy.Subscriber( "/joint_states", JointState, joint_position_interrupt )
-                rospy.Subscriber( "/gazebo/link_states", LinkStates, link_position_interrupt )
-                rospy.wait_for_service( '/gazebo/set_model_state' )
-                move_model = rospy.ServiceProxy( '/gazebo/set_model_state', SetModelState )
+                rospy.Subscriber( "/ns1/joint_states", JointState, joint_position_interrupt )
+                rospy.Subscriber( "/ns1/gazebo/link_states", LinkStates, link_position_interrupt )
+                rospy.wait_for_service( '/ns1/gazebo/set_model_state' )
+                move_model = rospy.ServiceProxy( '/ns1/gazebo/set_model_state', SetModelState )
 
                 arm_controller = ArmController()
                 logfilename = utils.get_logfilename()
 
                 utils.delete_model()
                 arm_controller.send_arm_goal( INITIAL_ARM_POSITION )
+                """
                 utils.spawn_model()
+                """
 
 
                 model_actor = ActorModel( NUM_JOINTS, OUTPUT_DIMS ).double()
@@ -175,7 +178,13 @@ def ppo_loop():
                                                 distance = 0
                                                 if move_result == 0:
                                                                 distance, done = distance_from_goal( new_state_grip_pos, GRIPPER_GOAL )
-                                                                if not done:
+                                                                pos_tol = [ max( 0.05, 0.2*abs(x-y).item() ) for x, y in zip( action[0], current_state ) ]
+                                                                diff = [ abs(x-y).item() for x, y in zip( action[0], new_state ) ]
+                                                                bad_move =  any( x > y for x, y in zip( diff, pos_tol ) )
+                                                                if bad_move:
+                                                                            reward, done = CONTACT_REWARD, True
+                                                                            log_string += f"\tCOLLISION\n"
+                                                                elif not done:
                                                                             reward = reward_function( distance )
                                                                 else:
                                                                             reward = 100
@@ -194,6 +203,8 @@ def ppo_loop():
                                                                             else:
                                                                                         reward = 100
                                                                         
+                                                if not done and  (it+1)%32==0:
+                                                                done = True
 
                                                 mask = not done
                                                 #print( "reward:", reward, " distance:", distance )
@@ -214,13 +225,11 @@ def ppo_loop():
                                                 if done:
                                                                 #pass
                                                                 rospy.loginfo( "Resetting" )
-                                                                #utils.delete_model()
-                                                                utils.move_model( move_model, (0, 0, 3) )
+                                                                #utils.move_model( move_model, (0, 0, 3) )
                                                                 arm_controller.send_arm_goal( [0, 0, 0, 0, 0, 0, 0] )
                                                                 arm_controller.send_arm_goal( INITIAL_ARM_POSITION )
                                                                 utils.reset_world( move_model )
-                                                                #utils.spawn_model()
-                                                                utils.move_model( move_model )
+                                                                #utils.move_model( move_model )
                                                                 current_state = np.array( INITIAL_ARM_POSITION )
                                                 open_file = utils.get_logfile( logfilename )
                                                 open_file.write( log_string )

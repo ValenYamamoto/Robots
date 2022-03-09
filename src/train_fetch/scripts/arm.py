@@ -22,10 +22,10 @@ class ArmController:
 
         CONTACT_MADE = False
 
-        def __init__(self):
-                self.client = actionlib.SimpleActionClient('arm_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+        def __init__(self, namespace="/ns1"):
+                self.client = actionlib.SimpleActionClient(namespace+'/'+'arm_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
                 #rospy.init_node( 'ArmTest', anonymous=False )
-                rospy.Subscriber( "/box_contact_topic", ContactsState, self.contactMade )
+                rospy.Subscriber( namespace+"/box_contact_topic", ContactsState, self.contactMade )
 
 
         def contactMade( self, data ):

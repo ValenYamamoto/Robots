@@ -145,10 +145,11 @@ def reward_function( distance ):
                 return 1- ((distance / INITIAL_DISTANCE) **2 )
 
 def ppo_loop():
-                rospy.Subscriber( "/joint_states", JointState, joint_position_interrupt )
-                rospy.Subscriber( "/gazebo/link_states", LinkStates, link_position_interrupt )
-                rospy.wait_for_service( '/gazebo/set_model_state' )
-                move_model = rospy.ServiceProxy( '/gazebo/set_model_state', SetModelState )
+                namespace = "/ns1"
+                rospy.Subscriber( namespace+"/joint_states", JointState, joint_position_interrupt )
+                rospy.Subscriber( namespace+"/gazebo/link_states", LinkStates, link_position_interrupt )
+                rospy.wait_for_service( namespace+'/gazebo/set_model_state' )
+                move_model = rospy.ServiceProxy( namespace+'/gazebo/set_model_state', SetModelState )
 
                 arm_controller = ArmController()
 
@@ -174,7 +175,10 @@ def ppo_loop():
                 prob = dist.log_prob( mu )
                 entropy = dist.entropy()
 
-                move_result = arm_controller.send_arm_goal( action[0], current_state )
+                ACTION = [-6.28, -6.28, 5.7620, 6.18, 5.7698, -6.28, 6.18]
+                print( "ACTION", ACTION )
+                #move_result = arm_controller.send_arm_goal( action[0], current_state )
+                move_result = arm_controller.send_arm_goal( [-6.28, -6.28, 5.7620, 6.18, 5.7698, -6.28, 6.18], current_state )
                 print( "MOVE RESULT:", move_result )
 
                 new_state_grip_pos = utils.get_gripper_pos( link_data )
@@ -183,20 +187,25 @@ def ppo_loop():
                 distance = 0
                 if move_result == 0:
                             distance, done = distance_from_goal( new_state_grip_pos, GRIPPER_GOAL )
-                            pos_tol = [ max( 0.05, 0.2*abs(x-y).item() ) for x, y in zip( action[0], current_state ) ]
+                            pos_tol = [ max( 0.05, 0.2*abs(x-y).item() ) for x, y in zip( ACTION, current_state ) ]
                             print( "TOLERANCES:", pos_tol )
-                            diff = [ abs(x-y).item() for x, y in zip( action[0], new_state ) ]
+                            diff = [ abs(x-y).item() for x, y in zip( ACTION, new_state ) ]
                             print( "DIFF:", diff )
                             print( "ANY:", any( x > y for x, y in zip( diff, pos_tol ) ) )
-                            if not done:
+                            bad =  any( x > y for x, y in zip( diff, pos_tol ) ) 
+                            if bad:
+                                        reward = CONTACT_REWARD
+                                        print( "BAD" )
+                            elif not done:
                                         reward = reward_function( distance )
+                                        print( "OK" )
                             else:
                                         reward = 100
                 else:
                             reward,done = CONTACT_REWARD, True
-                            pos_tol = [ max( 0.05, 0.2*abs(x-y).item() ) for x, y in zip( action[0], current_state ) ]
+                            pos_tol = [ max( 0.05, 0.2*abs(x-y).item() ) for x, y in zip( ACTION, current_state ) ]
                             print( "TOLERANCES:", pos_tol )
-                            diff = [ abs(x-y).item() for x, y in zip( action[0], new_state ) ]
+                            diff = [ abs(x-y).item() for x, y in zip( ACTION, new_state ) ]
                             print( "DIFF:", diff )
                             print( "ANY:", any( x > y for x, y in zip( diff, pos_tol ) ) )
                             if( move_result == 1 or any( x > y for x, y in zip( diff, pos_tol ) ) ):

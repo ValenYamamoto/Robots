@@ -40,3 +40,28 @@ class CriticModel( torch.nn.Module ):
     def forward( self, x ):
         return  self.outputLinear( F.relu( self.linear3( F.relu( self.linear2( F.relu( self.linear1( x ) ) ) ) )  ) )
 
+class ActorModelNoSigma( torch.nn.Module ):
+    def __init__( self, input_dims, output_dims, hidden_dims=1024 ):
+        super( ActorModel, self ).__init__()
+        self.linear1 = torch.nn.Linear( input_dims, hidden_dims )
+        self.linear2 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.linear3 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.linear4 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.linear5 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.linear6 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.mu = torch.nn.Linear( hidden_dims, output_dims )
+
+    def forward( self, x ):
+        mid = F.relu( self.linear1( x ) )
+        mid = F.relu( self.linear2( mid ) )
+        mid = F.relu( self.linear3( mid ) )
+        mid = F.relu( self.linear4( mid ) )
+        mid = F.relu( self.linear5( mid ) )
+        mid = F.relu( self.linear6( mid ) )
+        mean = torch.clamp( self.mu( mid ), min=-6.28, max=6.28 )
+        return mean, sigma
+
+    def getDistribution( self, x, sigma=0.6 ):
+        mu, sigma = self.forward( x )
+        dist = torch.distributions.Normal( mu, sigma )
+        return dist

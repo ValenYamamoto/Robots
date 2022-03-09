@@ -44,7 +44,7 @@ def move_model_msg( name, pose=(0, 0, 0), orientation=(0, 0, 0, 0)):
         state_msg.pose.orientation.w = orientation[3];
         return state_msg
 
-def spawn_model( model_name='contact_box', pose=(0.75, 0, 0) ):
+def spawn_model( model_name='contact_box', pose=(0.75, 0, 0), namespace="" ):
         initial_pose = Pose()
         initial_pose.position.x = pose[0]
         initial_pose.position.y = pose[1]
@@ -55,7 +55,7 @@ def spawn_model( model_name='contact_box', pose=(0.75, 0, 0) ):
         with open( model_filename ) as xml_file:
                 model_xml = xml_file.read().replace( '\n', '' )
 
-        spawn_model_prox = rospy.ServiceProxy( 'gazebo/spawn_sdf_model', SpawnModel )
+        spawn_model_prox = rospy.ServiceProxy( namespace + 'gazebo/spawn_sdf_model', SpawnModel )
         spawn_model_prox( 'contact_box', model_xml, '', initial_pose, 'world' )
 
 def reset_world( proxy ):
