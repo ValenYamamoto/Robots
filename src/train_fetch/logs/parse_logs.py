@@ -44,6 +44,32 @@ def parse_rewards( f ):
 
     return all_total_rewards, all_mean_rewards, current_max, last_iter
 
+def epoch_rewards( f ):
+    all_rewards = []
+    current_epoch = 0
+    current_rewards = []
+    last_iter = 0
+    for line in f:
+        if line.startswith( "epoch" ):
+            s = line.split()
+            epoch, iteration = int( s[1][:-1] ), int( s[3] )
+            last_iter = iteration
+            if epoch == current_epoch:
+                while not line.lstrip().startswith( "reward" ):
+                    line = next(f)
+                reward = float( line.lstrip().split()[1][:-1] )
+                current_rewards.append( reward )
+            else:
+                #print( f"HERE {epoch} {current_epoch}" )
+                all_rewards.append( current_rewards )
+                while not line.lstrip().startswith( "reward" ):
+                    line = next(f)
+                reward = float( line.lstrip().split()[1][:-1] )
+                current_rewards = [ reward ]
+            current_epoch = epoch
+
+    return pandas.DataFrame( all_rewards ) 
+
 """
 epoch: 0, step: 0
 	action: tensor([[ 0.0356, -0.0631,  0.0705,  0.0578,  0.0161,  0.0037, -0.0290]],
@@ -166,6 +192,7 @@ if __name__ == "__main__":
     parser.add_argument( '-df', '--dataframe', action='store_true' )
     parser.add_argument( '-p', '--print', action='store_true' )
     parser.add_argument( '-a', '--action', action='store_true' )
+    parser.add_argument( '-r', '--rewards', action='store_true' )
     args = parser.parse_args()
     filename = args.filename 
     if args.stats:
@@ -187,6 +214,10 @@ if __name__ == "__main__":
         with open( filename ) as f:
             df = create_action_df( f )
         df.to_pickle( filename[:-4]+"-action.p" )
+    if args.rewards:
+        with open( filename ) as f:
+            df = epoch_rewards( f )
+        df.to_pickle( filename[:-4]+"-reward.p" )
 
 
             
