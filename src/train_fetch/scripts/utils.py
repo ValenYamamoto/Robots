@@ -27,12 +27,12 @@ joint_names = {name:index for index, name in enumerate( joint_names ) }
 def delete_model( model_name='contact_box' ):
         os.system( "gz model -m contact_box -d" )
 
-def move_model( proxy, pose=(0.75, 0, 0) ):
+def move_model( proxy, pose=(0.75, 0, 0.25) ):
         #os.system( f"gz model -m contact_box -x {pose[0]} -y {pose[1]} -z {pose[2]} -R 0 -P 0 -Y 0" )
         msg = move_model_msg( "contact_box", pose=pose )
         return proxy( msg )
 
-def move_model_msg( name, pose=(0, 0, 0), orientation=(0, 0, 0, 0)):
+def move_model_msg( name, pose=(0, 0, 0.5), orientation=(0, 0, 0, 0)):
         state_msg = ModelState()
         state_msg.model_name = name 
         state_msg.pose.position.x = pose[0];
@@ -44,7 +44,7 @@ def move_model_msg( name, pose=(0, 0, 0), orientation=(0, 0, 0, 0)):
         state_msg.pose.orientation.w = orientation[3];
         return state_msg
 
-def spawn_model( model_name='contact_box', pose=(0.75, 0, 0), namespace="" ):
+def spawn_model( model_name='contact_box', pose=(0.75, 0, 0.25), namespace="" ):
         initial_pose = Pose()
         initial_pose.position.x = pose[0]
         initial_pose.position.y = pose[1]

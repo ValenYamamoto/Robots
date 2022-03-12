@@ -1,0 +1,11 @@
+epoch: 0, step: 0
+	action: tensor([[ 0.0079, -0.0170, -0.0182, -0.0062, -0.0069,  0.0091, -0.0245]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.0156]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: -0.23652946086112547, distance: 1.2725033294098094 entropy -16.16007039207513
+epoch: 0, step: 1
+	action: tensor([[ 0.0075, -0.0074, -0.0176, -0.0106, -0.0058,  0.0098, -0.0937]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.0608]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: -0.22894799774023555, distance: 1.2685963176591124 entropy -16.13945064480895
+LOSS epoch 0 actor 0.31406883322236673 critic 0.14897856714581129 entropy 0.01

@@ -34,6 +34,7 @@ def parse_rewards( f ):
                 reward = float( line.lstrip().split()[1][:-1] )
                 current_max = max( current_max, reward )
                 current_rewards = [ reward ]
+                current_max = -1000
             current_epoch = epoch
     if current_rewards:
         total = sum( current_rewards )
@@ -170,10 +171,9 @@ if __name__ == "__main__":
     if args.stats:
         with open( filename ) as f:
             totals, means, reward, last_iter = parse_rewards( f )
-        print( "TOTALS" )
-        print( totals )
-        print( "MEANS" )
-        print( means )
+        dic = { "totals": totals, "means": means }
+        df = pandas.DataFrame.from_dict( dic )
+        print( df )
         print( "epochs:", len( totals ), "max reward:", reward, "step:", last_iter )
     if args.print:
         with open( filename ) as f:

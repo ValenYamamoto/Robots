@@ -1,0 +1,676 @@
+epoch: 0, step: 0
+	action: tensor([[ 0.0192, -0.0061, -0.0003,  0.0322,  0.0165,  0.0205, -0.0433]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1354]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3340529263902611, distance: 0.9338487691062405 entropy -18.834200998536538
+epoch: 0, step: 1
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0339]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1266]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3335870254623484, distance: 0.9341753753453267 entropy -18.850604819095537
+epoch: 0, step: 2
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0070]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.33337750401540256, distance: 0.9343222170199265 entropy -18.850596802876982
+epoch: 0, step: 3
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0216]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3327345854885181, distance: 0.9347726580892428 entropy -18.85054072312048
+epoch: 0, step: 4
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0277]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.33243306948658746, distance: 0.9349838312416388 entropy -18.850547951278426
+epoch: 0, step: 5
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0087]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3321214008935126, distance: 0.9352020648580741 entropy -18.85056558025688
+epoch: 0, step: 6
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0045]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3313404472719509, distance: 0.9357486732273825 entropy -18.850541311783648
+epoch: 0, step: 7
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0026]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1272]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3302735574008431, distance: 0.9364948996629766 entropy -18.85053471981135
+epoch: 0, step: 8
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0463]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1272]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.32952635323270396, distance: 0.9370171709820649 entropy -18.850534474599417
+epoch: 0, step: 9
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0069]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1264]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.32970670579346684, distance: 0.9368911370856451 entropy -18.85058349035801
+epoch: 0, step: 10
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0272]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.32901483111844154, distance: 0.9373745404498621 entropy -18.850550701167755
+epoch: 0, step: 11
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0138]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3287700852185994, distance: 0.9375454813807438 entropy -18.850574325740006
+epoch: 0, step: 12
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0209]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3282128025675555, distance: 0.9379345950206378 entropy -18.850550725995795
+epoch: 0, step: 13
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0013]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1269]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.32776992390368787, distance: 0.9382437128352232 entropy -18.850556419681595
+epoch: 0, step: 14
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0112]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1272]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.32685350260840806, distance: 0.9388830279357763 entropy -18.85054691686691
+epoch: 0, step: 15
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0007]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3261652122734571, distance: 0.9393629078802695 entropy -18.850551027448972
+epoch: 0, step: 16
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0005]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1273]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.32515593522127983, distance: 0.9400661386271157 entropy -18.850545261175117
+epoch: 0, step: 17
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0002]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1273]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.32415888770525303, distance: 0.9407603320809238 entropy -18.850545229875728
+epoch: 0, step: 18
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0292]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1273]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3231999071471767, distance: 0.9414275385043575 entropy -18.85054565369713
+epoch: 0, step: 19
+	action: tensor([[ 0.0172, -0.0049,  0.0010,  0.0320,  0.0211,  0.0214, -0.0157]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1279]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.32133059606826586, distance: 0.9427267459602703 entropy -18.850542019657535
+epoch: 0, step: 20
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0287]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3207967058846021, distance: 0.9430974814067764 entropy -18.85055020362316
+epoch: 0, step: 21
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0098]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.32070489622727016, distance: 0.943161219709838 entropy -18.850568585567224
+epoch: 0, step: 22
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0105]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31995147379848354, distance: 0.9436841160818324 entropy -18.85055095851024
+epoch: 0, step: 23
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0104]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31923630885059995, distance: 0.944180192783699 entropy -18.850550736304854
+epoch: 0, step: 24
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0109]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3185322002922224, distance: 0.9446683456854525 entropy -18.850551180499842
+epoch: 0, step: 25
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0370]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3181272187222527, distance: 0.9449490019747364 entropy -18.850550730720936
+epoch: 0, step: 26
+	action: tensor([[ 0.0172, -0.0049,  0.0010,  0.0320,  0.0211,  0.0215, -0.0279]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1280]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3156492673165444, distance: 0.9466644350580888 entropy -18.85054579439642
+epoch: 0, step: 27
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0523]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3154084649228226, distance: 0.9468309717487607 entropy -18.850566258520505
+epoch: 0, step: 28
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0107]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1263]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31621039177847343, distance: 0.9462762528892358 entropy -18.850577274031508
+epoch: 0, step: 29
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0159]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31543610547610157, distance: 0.946811857287984 entropy -18.850541535898774
+epoch: 0, step: 30
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0395]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3147527728615307, distance: 0.9472842938652868 entropy -18.85055037280411
+epoch: 0, step: 31
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0184]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1265]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3153124991269911, distance: 0.9468973326362318 entropy -18.8505872314284
+epoch: 0, step: 32
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0046]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1275]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3144449492042183, distance: 0.9474970373571548 entropy -18.850529639796303
+epoch: 0, step: 33
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0383]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1273]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3136632727490781, distance: 0.9480370560797404 entropy -18.850533854329996
+epoch: 0, step: 34
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0397]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1265]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.313825710254517, distance: 0.9479248619619379 entropy -18.850587340725045
+epoch: 0, step: 35
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0272]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1265]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31404839229556214, distance: 0.947771035904394 entropy -18.85058788106338
+epoch: 0, step: 36
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0090]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31457075243913446, distance: 0.947410097831932 entropy -18.85056425060758
+epoch: 0, step: 37
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0135]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1275]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3146341719259761, distance: 0.947366267157695 entropy -18.850540608392475
+epoch: 0, step: 38
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0116]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1276]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31458434065495355, distance: 0.947400706872378 entropy -18.850539898369213
+epoch: 0, step: 39
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0251]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3138706473135233, distance: 0.947893821996199 entropy -18.85052976323941
+epoch: 0, step: 40
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0433]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31366967761518183, distance: 0.9480326325480173 entropy -18.85055829850749
+epoch: 0, step: 41
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0115]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1265]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3141946291299249, distance: 0.9476700036871472 entropy -18.850586277255996
+epoch: 0, step: 42
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0168]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3147084625842371, distance: 0.9473149205862325 entropy -18.85055095096187
+epoch: 0, step: 43
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0179]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1275]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31400831588039413, distance: 0.9477987220489557 entropy -18.850529228262303
+epoch: 0, step: 44
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0151]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3140859582314648, distance: 0.947745083349536 entropy -18.850551661801468
+epoch: 0, step: 45
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0166]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31470539792339736, distance: 0.9473170388056585 entropy -18.85055025285656
+epoch: 0, step: 46
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0592]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1276]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31343632236118246, distance: 0.9481937864320132 entropy -18.85054017635045
+epoch: 0, step: 47
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0318]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1263]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31508271384458486, distance: 0.9470562115541504 entropy -18.8505872501581
+epoch: 0, step: 48
+	action: tensor([[ 0.0172, -0.0049,  0.0010,  0.0320,  0.0211,  0.0215,  0.0093]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1279]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.314525377238256, distance: 0.9474414564383941 entropy -18.850543174853446
+epoch: 0, step: 49
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0128]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1275]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31461710468073634, distance: 0.9473780629250729 entropy -18.85054031746095
+epoch: 0, step: 50
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0185]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1275]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3139961327822288, distance: 0.9478071383853857 entropy -18.850539682675468
+epoch: 0, step: 51
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0029]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31444218997474105, distance: 0.9474989441034631 entropy -18.850552204449514
+epoch: 0, step: 52
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0505]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1273]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3135338247753916, distance: 0.9481264551203479 entropy -18.850543825879022
+epoch: 0, step: 53
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0648]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1263]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3140508541359799, distance: 0.9477693351553104 entropy -18.85057840318817
+epoch: 0, step: 54
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0041]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1261]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3153286632943344, distance: 0.9468861553493246 entropy -18.850573146275746
+epoch: 0, step: 55
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0274]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31492150483172576, distance: 0.9471676593285082 entropy -18.850539665713917
+epoch: 0, step: 56
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0215,  0.0047]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1277]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3144454062640979, distance: 0.9474967215087386 entropy -18.850535443277696
+epoch: 0, step: 57
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0121]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1273]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3146056190559484, distance: 0.9473860009575588 entropy -18.850534063164925
+epoch: 0, step: 58
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0416]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1275]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31361884275148877, distance: 0.9480677411653446 entropy -18.850540029645753
+epoch: 0, step: 59
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0173]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1265]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3147597366866066, distance: 0.9472794804646495 entropy -18.850586620115468
+epoch: 0, step: 60
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0161]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1275]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31405063603807604, distance: 0.9477694858271861 entropy -18.850529103760305
+epoch: 0, step: 61
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0062]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31449969849552095, distance: 0.9474592024473366 entropy -18.850550568101987
+epoch: 0, step: 62
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0205]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31396097873555073, distance: 0.9478314231096628 entropy -18.850540770777652
+epoch: 0, step: 63
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0338]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1269]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3137440057466907, distance: 0.9479812961872242 entropy -18.8505555010785
+epoch: 0, step: 64
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0074]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31454515879352385, distance: 0.9474277856181132 entropy -18.85059232860176
+epoch: 0, step: 65
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0106]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3141525259965534, distance: 0.9476990930366077 entropy -18.850540866555132
+epoch: 0, step: 66
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0095]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3141898145966521, distance: 0.9476733301270895 entropy -18.850541318936205
+epoch: 0, step: 67
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0239]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31391101176978975, distance: 0.9478659396578983 entropy -18.850540753262912
+epoch: 0, step: 68
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0466]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3136456633933613, distance: 0.9480492179049861 entropy -18.850554625103808
+epoch: 0, step: 69
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0090]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1264]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31460082480010454, distance: 0.9473893143804982 entropy -18.850583071235125
+epoch: 0, step: 70
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0546]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3134924133925111, distance: 0.9481550527679407 entropy -18.85053195935733
+epoch: 0, step: 71
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0133]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1263]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.314444739496743, distance: 0.9474971822741795 entropy -18.85057515962058
+epoch: 0, step: 72
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0017]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1269]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3143456066502033, distance: 0.9475656849193126 entropy -18.850541942011436
+epoch: 0, step: 73
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0420]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3136369051777912, distance: 0.9480552666705365 entropy -18.85053809644767
+epoch: 0, step: 74
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0094]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1265]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31461243711742737, distance: 0.9473812888150009 entropy -18.85058696495637
+epoch: 0, step: 75
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0577]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31346435004604034, distance: 0.9481744321108286 entropy -18.850531305937956
+epoch: 0, step: 76
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0667]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1262]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31422229580731875, distance: 0.9476508880999728 entropy -18.850574601922887
+epoch: 0, step: 77
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0151]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1261]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31567161035241964, distance: 0.9466489813374549 entropy -18.850571206671955
+epoch: 0, step: 78
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0120]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1275]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31460008942743667, distance: 0.9473898226128146 entropy -18.8505289198323
+epoch: 0, step: 79
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0016]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31432828183621686, distance: 0.9475776561804109 entropy -18.850529556453402
+epoch: 0, step: 80
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0021]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1272]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3143344544440837, distance: 0.9475733909917617 entropy -18.850538027162294
+epoch: 0, step: 81
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0179]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3147294593940485, distance: 0.9473004079718972 entropy -18.850538417067472
+epoch: 0, step: 82
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0206]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1275]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3139540615223786, distance: 0.9478362015080303 entropy -18.850528983187193
+epoch: 0, step: 83
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0070]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3145277252143531, distance: 0.9474398337876611 entropy -18.850546187830133
+epoch: 0, step: 84
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0253]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3148699583467349, distance: 0.9472032919206341 entropy -18.850540727830726
+epoch: 0, step: 85
+	action: tensor([[ 0.0172, -0.0049,  0.0010,  0.0320,  0.0211,  0.0214, -0.0611]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1278]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31340651908305417, distance: 0.9482143664432958 entropy -18.850540543824557
+epoch: 0, step: 86
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0190]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1263]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31455501547582454, distance: 0.9474209736972572 entropy -18.85058721275316
+epoch: 0, step: 87
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0181]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31406723445150153, distance: 0.9477580188255734 entropy -18.85054434822703
+epoch: 0, step: 88
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0222]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1269]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31483813355269386, distance: 0.9472252908097477 entropy -18.850543014357044
+epoch: 0, step: 89
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0215,  0.0387]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1276]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31514275415769233, distance: 0.9470147008500066 entropy -18.850532704814963
+epoch: 0, step: 90
+	action: tensor([[ 0.0172, -0.0049,  0.0010,  0.0320,  0.0211,  0.0215, -0.0325]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1279]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3137279392871919, distance: 0.9479923930767851 entropy -18.850542322467383
+epoch: 0, step: 91
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0631]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1266]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3135996603834025, distance: 0.9480809889483941 entropy -18.850577248920192
+epoch: 0, step: 92
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0276]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1261]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31472458566665884, distance: 0.9473037766237375 entropy -18.85057427555756
+epoch: 0, step: 93
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0342]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3150839012649239, distance: 0.9470553906124703 entropy -18.850565487677734
+epoch: 0, step: 94
+	action: tensor([[ 0.0172, -0.0049,  0.0010,  0.0320,  0.0211,  0.0215, -0.0085]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1278]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3141857858512922, distance: 0.9476761136443116 entropy -18.850539630013625
+epoch: 0, step: 95
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0402]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31518191747083457, distance: 0.9469876231168444 entropy -18.850550235969568
+epoch: 0, step: 96
+	action: tensor([[ 0.0172, -0.0049,  0.0010,  0.0320,  0.0211,  0.0215, -0.0582]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1281]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31340628392529457, distance: 0.9482145288246416 entropy -18.850551906548908
+epoch: 0, step: 97
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214, -0.0452]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1263]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3142884233057247, distance: 0.9476051974242986 entropy -18.850587345559404
+epoch: 0, step: 98
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0018]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1265]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3148947563098641, distance: 0.9471861499742696 entropy -18.850602753063267
+epoch: 0, step: 99
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0080]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1273]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31452181217322794, distance: 0.9474439201955476 entropy -18.850544936806614
+epoch: 0, step: 100
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0050]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.314259423559753, distance: 0.9476252350176552 entropy -18.85054055616842
+epoch: 0, step: 101
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0685]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1272]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3134166426615035, distance: 0.9482073758745115 entropy -18.850548100004136
+epoch: 0, step: 102
+	action: tensor([[ 0.0173, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0034]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1261]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3149572262218395, distance: 0.9471429653797436 entropy -18.850569825202594
+epoch: 0, step: 103
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0149]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1273]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31406979870662444, distance: 0.9477562472994498 entropy -18.85053398363143
+epoch: 0, step: 104
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0341]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1269]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31507092607742104, distance: 0.947064361173313 entropy -18.850542059159483
+epoch: 0, step: 105
+	action: tensor([[ 0.0172, -0.0049,  0.0010,  0.0320,  0.0211,  0.0215, -0.0115]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1278]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3141260984091643, distance: 0.9477173515855466 entropy -18.850539909222835
+epoch: 0, step: 106
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0322]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1270]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3150215530128533, distance: 0.9470984950924306 entropy -18.850541462616373
+epoch: 0, step: 107
+	action: tensor([[ 0.0172, -0.0049,  0.0010,  0.0320,  0.0211,  0.0215, -0.0219]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1278]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31392274529753084, distance: 0.9478578343982014 entropy -18.85053880641154
+epoch: 0, step: 108
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0217]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3139676249068518, distance: 0.947826831923838 entropy -18.85054850191724
+epoch: 0, step: 109
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0199]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3140028609026353, distance: 0.9478024904697617 entropy -18.850548135891692
+epoch: 0, step: 110
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0334]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3137521428258955, distance: 0.9479756759654538 entropy -18.850545137703655
+epoch: 0, step: 111
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0191]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3147791599288057, distance: 0.9472660549771611 entropy -18.85059123301387
+epoch: 0, step: 112
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0018]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1276]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31432492980736937, distance: 0.9475799723790178 entropy -18.850530035047292
+epoch: 0, step: 113
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0028]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3144349387328953, distance: 0.9475039550053334 entropy -18.850538191568166
+epoch: 0, step: 114
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0116]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1272]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31413284531457597, distance: 0.9477126902512706 entropy -18.85053473945041
+epoch: 0, step: 115
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0069]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31451527725937845, distance: 0.9474484363491972 entropy -18.850550643030022
+epoch: 0, step: 116
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0032]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3143047229505377, distance: 0.9475939348756891 entropy -18.85054097183072
+epoch: 0, step: 117
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0122]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1272]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3141209819400925, distance: 0.9477208864608815 entropy -18.8505472344956
+epoch: 0, step: 118
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0190]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3139978206998707, distance: 0.9478059723413949 entropy -18.850550658818644
+epoch: 0, step: 119
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0271]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1269]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.313858228128835, distance: 0.9479024005646023 entropy -18.85055326246774
+epoch: 0, step: 120
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0282]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31384166458973795, distance: 0.9479138417305267 entropy -18.85057406836719
+epoch: 0, step: 121
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0172]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1268]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3140567847853877, distance: 0.9477652379858411 entropy -18.850577077603628
+epoch: 0, step: 122
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0033]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1269]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3144592971690605, distance: 0.9474871222341493 entropy -18.850542495809275
+epoch: 0, step: 123
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0114]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1274]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3141422150858313, distance: 0.9477062167808686 entropy -18.850543283083248
+epoch: 0, step: 124
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214, -0.0280]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1271]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.313827727135384, distance: 0.9479234688370782 entropy -18.850550779894316
+epoch: 0, step: 125
+	action: tensor([[ 0.0172, -0.0049,  0.0012,  0.0320,  0.0211,  0.0214,  0.0008]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1267]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.31442290089594127, distance: 0.9475122735798198 entropy -18.85056619149645
+epoch: 0, step: 126
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0030]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1272]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3144240638897623, distance: 0.9475114699128157 entropy -18.850536441716066
+epoch: 0, step: 127
+	action: tensor([[ 0.0172, -0.0049,  0.0011,  0.0320,  0.0211,  0.0214,  0.0162]],
+       dtype=torch.float64)
+	q_value: tensor([[-0.1272]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3146947341488835, distance: 0.9473244093116904 entropy -18.8505345903406
+LOSS epoch 0 actor 0.34386023580810976 critic 23.073205788184026 entropy 0.01
+epoch: 1, step: 0
+	action: tensor([[-0.4897, -0.5939,  1.8987,  0.3029, -0.6585,  1.8933,  2.2880]],
+       dtype=torch.float64)
+	q_value: tensor([[0.0360]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	reward: 0.3302520429447541, distance: 0.9365099416378085 entropy -18.3950170905739
+epoch: 1, step: 1
+	action: tensor([[-1.0558, -1.2702,  4.1157,  0.5985, -1.4150,  4.0694,  2.8117]],
+       dtype=torch.float64)
+	q_value: tensor([[0.1131]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	COLLISION
+	reward: -50, distance: 0 entropy -18.317505121030003
+epoch: 1, step: 2
+	action: tensor([[-0.7943, -1.0344,  3.3527,  0.4671, -1.0902,  3.2506,  1.5612]],
+       dtype=torch.float64)
+	q_value: tensor([[0.3190]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	COLLISION
+	reward: -50, distance: 0 entropy -18.317505121030003
+epoch: 1, step: 3
+	action: tensor([[-0.7943, -1.0344,  3.3527,  0.4671, -1.0902,  3.2506,  1.6389]],
+       dtype=torch.float64)
+	q_value: tensor([[0.3190]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	COLLISION
+	reward: -50, distance: 0 entropy -18.317505121030003
+epoch: 1, step: 4
+	action: tensor([[-0.7943, -1.0344,  3.3527,  0.4671, -1.0902,  3.2506,  1.5335]],
+       dtype=torch.float64)
+	q_value: tensor([[0.3190]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	COLLISION
+	reward: -50, distance: 0 entropy -18.317505121030003
+epoch: 1, step: 5
+	action: tensor([[-0.7943, -1.0344,  3.3527,  0.4671, -1.0902,  3.2506,  0.8059]],
+       dtype=torch.float64)
+	q_value: tensor([[0.3190]], dtype=torch.float64, grad_fn=<AddmmBackward0>)
+	COLLISION
+	reward: -50, distance: 0 entropy -18.317505121030003

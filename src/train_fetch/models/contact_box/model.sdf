@@ -3,7 +3,6 @@
   <model name="contact_box">
     <link name="link">
       <pose>0 0 0.3 0 0 0</pose>
-      <gravity>0</gravity>
 
       <collision name="box_collision">
         <geometry>

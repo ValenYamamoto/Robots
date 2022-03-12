@@ -26,16 +26,26 @@ class ArmController:
                 self.client = actionlib.SimpleActionClient(namespace+'/'+'arm_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
                 #rospy.init_node( 'ArmTest', anonymous=False )
                 rospy.Subscriber( namespace+"/box_contact_topic", ContactsState, self.contactMade )
+                rospy.Subscriber( "/ground_contact_topic", ContactsState, self.contactMadeGround )
 
 
         def contactMade( self, data ):
                 states = data.states
                 for state in states:
-                        if "ground_plane" not in state.collision1_name and "ground_plane" not in state.collision2_name:
+                        if "ground_sensor" not in state.collision1_name and "ground_sensor" not in state.collision2_name:
                                 self.CONTACT_MADE = True
                                 break
+
+        def contactMadeGround( self, data ):
+                states = data.states
+                for state in states:
+                        if state.collision1_name.startswith( "fetch" ):
+                                name = state.collision1_name
+                                if "wheel" not in name and "base_link" not in name:
+                                        self.CONTACT_MADE = True
+                                        break
         
-        def send_arm_goal(self, joint_points, previous=None ):
+        def send_arm_goal(self, joint_points, previous=None, ignore_contact=False ):
                 duration = 1
                 usual_time_limit = 4
                 if previous is not None:
@@ -84,7 +94,7 @@ class ArmController:
                         if (rospy.Time.now() - time_start).to_sec() > time_limit:
                                 self.client.cancel_all_goals()
                                 return 3
-                        if self.CONTACT_MADE == True:
+                        if not ignore_contact and self.CONTACT_MADE == True:
                                 self.client.cancel_all_goals()
                                 self.CONTACT_MADE = False
                                 return 1
