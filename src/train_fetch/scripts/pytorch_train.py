@@ -20,9 +20,9 @@ import numpy as np
 import utils
 
 # saved model files to load, if no load uncomment last line
-ACTOR_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0310-1042/actor20' 
-CRITIC_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0310-1042/critic20' 
-INITIAL_STD_DEV = 1.57*(0.9**9)
+ACTOR_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0312-1925/actor35' 
+CRITIC_FILE = '/home/simulator/Robots/src/train_fetch/saved_models/0312-1925/critic35' 
+INITIAL_STD_DEV = 1.57*(0.9**4)
 #ACTOR_FILE = None
 
 # learning rates
@@ -43,7 +43,7 @@ STEPS_PER_ITER = 5
 ITER_PER_EP=32
 
 # Std Dev decay constants
-DECAY_STD_EPOCHS=2
+DECAY_STD_EPOCHS=5
 MIN_STD_DEV = 0.25
 
 # arm position constants
@@ -87,9 +87,7 @@ def ppo_loop():
                 # set up arm and box
                 utils.delete_model()
                 arm_controller.send_arm_goal( INITIAL_ARM_POSITION )
-                """
                 utils.spawn_model()
-                """
 
 
                 # set up model, load weights if needed
@@ -198,11 +196,11 @@ def ppo_loop():
                                                 if done:
                                                                 #pass
                                                                 rospy.loginfo( "Resetting" )
-                                                                #utils.move_model( move_model, (0, 0, 3) )
+                                                                utils.move_model( move_model, (2, 0, 0.25 ) )
                                                                 arm_controller.send_arm_goal( [0, 0, 0, 0, 0, 0, 0], ignore_contact=True )
                                                                 arm_controller.send_arm_goal( INITIAL_ARM_POSITION, ignore_contact=True )
                                                                 utils.reset_world( move_model )
-                                                                #utils.move_model( move_model )
+                                                                utils.move_model( move_model )
                                                                 current_state = np.array( INITIAL_ARM_POSITION )
 
                                                 # write out to file
