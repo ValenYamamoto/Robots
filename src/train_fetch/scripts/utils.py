@@ -10,6 +10,7 @@ from std_srvs.srv import Empty
 from datetime import datetime
 
 import os
+import yaml
 
 import numpy as np
 
@@ -44,7 +45,7 @@ def move_model_msg( name, pose=(0, 0, 0.5), orientation=(0, 0, 0, 0)):
         state_msg.pose.orientation.w = orientation[3];
         return state_msg
 
-def spawn_model( model_name='contact_box', pose=(0.75, 0, 0.25), namespace="" ):
+def spawn_model( model_name='contact_box_ns1', pose=(0.75, 0, 0.25), namespace="/ns1/" ):
         initial_pose = Pose()
         initial_pose.position.x = pose[0]
         initial_pose.position.y = pose[1]
@@ -93,12 +94,12 @@ def get_joint_data( data ):
                         answer[joint_names[name]] = position
         return answer
 
-def set_arm( arm_controller, initial_pos ):
-        delete_model()
-        arm_controller.send_arm_goal( [0, 0, 0, 0, 0, 0, 0] )
-        reset_world()
-        arm_controller.send_arm_goal( initial_pos )
-        spawn_model()
+def reset_arm( arm_controller, initial_pos, move_proxy ):
+        move_model( move_proxy, (2, 0, 0.25 ) )
+        arm_controller.send_arm_goal( [0, 0, 0, 0, 0, 0, 0], ignore_contact=True )
+        arm_controller.send_arm_goal( initial_pos, ignore_contact=True )
+        reset_world( move_proxy )
+        move_model( move_proxy )
 
 def get_logfilename():
         now = datetime.now()
@@ -109,5 +110,18 @@ def get_logfilename():
 def get_logfile(name):
         return open( name, 'a' )
 
+def read_yaml( filename ):
+        with open( filename ) as f:
+                params_dict = yaml.safe_load( f )
+                params_dict['params']['initial_std_dev']  = eval( params_dict['params']['initial_std_dev'] )
+                params_dict['params']['actor_lr']  = float( params_dict['params']['actor_lr'] )
+                params_dict['params']['critic_lr']  = float( params_dict['params']['critic_lr'] )
+        return params_dict
 
 
+def distance_from_goal( current, goal, tol=1e-1 ):
+        d = distance(current, goal )
+        return d, abs( d ) < tol
+
+def distance( x, y ):
+        return sum( (a-b)**2 for a, b in zip( x, y ) ) ** 0.5
