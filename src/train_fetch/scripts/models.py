@@ -41,7 +41,7 @@ class CriticModel( torch.nn.Module ):
         return  self.outputLinear( F.relu( self.linear3( F.relu( self.linear2( F.relu( self.linear1( x ) ) ) ) )  ) )
 
 class ActorModelNoSigma( torch.nn.Module ):
-    _decay_rate = 0.9
+    _decay_rate = 0.95
     _sigma = 1.57
     def __init__( self, input_dims, output_dims, hidden_dims=1024 ):
         super( ActorModelNoSigma, self ).__init__()

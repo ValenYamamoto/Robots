@@ -1,0 +1,22 @@
+params:
+        actor_file : '/home/simulator/Robots/src/train_fetch/saved_models/0315-1140/actor40' 
+        critic_file : '/home/simulator/Robots/src/train_fetch/saved_models/0315-1140/critic40' 
+        load_file: yes
+        initial_std_dev : 1.57*(0.9**6)
+        actor_lr : 1e-4
+        critic_lr : 1e-3
+        contact_reward : -50
+        num_joints : 7
+        output_dims : 7
+        num_epochs : 100
+        ppo_steps : 128
+        steps_per_iter : 5
+        iter_per_ep: 32
+        decay_std_epochs: 7
+        min_std_dev : 0.25
+        test_freq : 5 
+
+arm_constants:
+        initial_arm_position : [-1.57, 0.9, -1.57, -1, 0, 0, 0]
+        gripper_goal : [0.5717, 0.605, 0.714526]
+        initial_distance : 1.144344254
