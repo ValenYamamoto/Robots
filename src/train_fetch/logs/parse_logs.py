@@ -155,7 +155,7 @@ def create_df( f ):
             rewards.append( r_value )
             entropies.append( entropy )
 
-            if r_value == 100:
+            if abs( r_value - 100 ) < 1:
                 hit_goals[epoch] += 1
             epoch_max[epoch] = max( epoch_max[epoch], r_value )
 
