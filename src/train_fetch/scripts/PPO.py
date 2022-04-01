@@ -61,8 +61,31 @@ def check_valid_move( current_state, new_state, action ):
                             return 1
                 return 0
 
-def reward_function( distance, params ):
+def reward_function( distance, point, last_distance, is_collision, is_done, params, box_position=(0.75, 0, 0), box_size=0.5 ):
+                distance_to_goal = distance_to_goal_reward_function( distance, params )
+                distance_to_cube = distance_to_cube_reward_function( point, box_position, box_size, params['reward_constants']['box_threshold'] )
+                distance_moved = distance_moved_reward_function( distance, last_distance )
+                return params['reward_constants']['goal_distance_constant'] * distance_to_goal \
+                        + params['reward_constants']['cube_distance_constant'] * min( distance_to_cube, 0 ) \
+                        + params['reward_constants']['distance_moved_constant'] * distance_moved \
+                        + params['reward_constants']['collision_constant'] * - max( 0, is_collision ) \
+                        + params['reward_constants']['done_constant'] * max( 0, is_done )
+
+
+def distance_to_goal_reward_function( distance, params ):
                 return 1- ((distance / params['arm_constants']['initial_distance']) **2 )
+
+def distance_to_cube_reward_function( point, box_position, box_size, threshold_distance ):
+                x, y, z = [ box_position[i] + point[i] for i in range( len(point ) ) ]
+                d = torch.sqrt( max( 0, x - box_size ) ** 2
+                                + max( 0, y- box_size ) ** 2
+                                + max( 0, z - box_size ) ** 2
+                              )
+                return (d / threshold_distance) ** 2 - 1
+
+def distance_moved_reward_function( current_distance, last_distance ):
+                return abs( current_distance - last_position )
+                
 
 def ppo_train_loop( arm_controller, model_actor, model_critic, params, joint_data, link_data, move_model, logfilename ):
                 # set up loss function and optimizers
@@ -72,6 +95,10 @@ def ppo_train_loop( arm_controller, model_actor, model_critic, params, joint_dat
 
                 # get current joint state
                 current_state = utils.get_joint_data( joint_data[0] ) 
+
+
+                # set up last distance from goal
+                last_distance = params['arm_constants']['initial_distance']
 
                 # begin training
                 for epoch in range( params['params']['num_epochs'] ):
@@ -112,15 +139,13 @@ def ppo_train_loop( arm_controller, model_actor, model_critic, params, joint_dat
 
                                                 # Was it a safe move?
                                                 bad_move = check_valid_move( current_state, new_state, action )
-                                                distance, done = utils.distance_from_goal( new_state_grip_pos, params['arm_constants']['gripper_goal'] )
                                                 move_result = move_result | bad_move
-                                                if move_result == 0:
-                                                                if not done:
-                                                                            reward = reward_function( distance, params )
-                                                                else:
-                                                                            reward = 100
-                                                else:
-                                                                reward,done = params['params']['contact_reward'], True
+
+                                                # get updated distance + reward
+                                                distance, done = utils.distance_from_goal( new_state_grip_pos, params['arm_constants']['gripper_goal'] )
+                                                reward = reward_function( distance, point, last_distance, move_result, done, params, box_position=(0.75, 0, 0), box_size=0.5 ):
+                                                if move_result != 0:
+                                                                done = True
                                                                 log_string += f"\tCOLLISION\n"
                                                                         
 
@@ -138,11 +163,13 @@ def ppo_train_loop( arm_controller, model_actor, model_critic, params, joint_dat
                                                 
 
                                                 current_state = new_state
+                                                last_distance = distance
 
                                                 # if hit something or goal, reset
                                                 if done:
                                                                 rospy.loginfo( "Resetting" )
                                                                 utils.reset_arm( arm_controller, params['arm_constants']['initial_arm_position'], move_model )
+                                                                last_distance = params['arm_constants']['initial_distance']
 
                                                 # write out to file
                                                 open_file = utils.get_logfile( logfilename )

@@ -20,3 +20,11 @@ arm_constants:
         initial_arm_position : [-1.57, 0.9, -1.57, -1, 0, 0, 0]
         gripper_goal : [0.5717, 0.605, 0.714526]
         initial_distance : 1.144344254
+
+reward_constants:
+        box_threshold: 0.1
+        goal_distance_constant: 5
+        cube_distance_constant: 5
+        distance_moved_constant: 5
+        collision_constant: 50
+        done_constant: 100

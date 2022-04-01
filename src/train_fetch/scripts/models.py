@@ -76,3 +76,51 @@ class ActorModelNoSigma( torch.nn.Module ):
         mu = self.forward( x )
         dist = torch.distributions.Normal( mu, torch.full( mu.shape, self._sigma ) )
         return dist
+
+class NAFModel( torch.nn.Module ):
+    def __init__( self, input_dims, output_dims, hidden_dims=1024 ):
+        super( ActorModelNoSigma, self ).__init__()
+        self.linear1 = torch.nn.Linear( input_dims, hidden_dims )
+        self.linear2 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.linear3 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.linear4 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.linear5 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.linear6 = torch.nn.Linear( hidden_dims, hidden_dims )
+        self.mu = torch.nn.Linear( hidden_dims, output_dims )
+        self.value = torch.nn.Linear( hidden_dims, 1 )
+        self.entries = torch.nn.Linear( hidden_dims, int( output_dims*(output_dims+1)/2 ) )
+
+
+        self.output_dims = output_dims
+
+    def forward( self, x ):
+        mid = F.relu( self.linear1( x ) )
+        mid = F.relu( self.linear2( mid ) )
+        mid = F.relu( self.linear3( mid ) )
+        mid = F.relu( self.linear4( mid ) )
+        mid = F.relu( self.linear5( mid ) )
+        mid = F.relu( self.linear6( mid ) )
+        mean = torch.clamp( self.mu( mid ), min=-6.28, max=6.28 )
+        Value = self.value( mid )
+        entries = torch.tanh( self.entries( mid ) )
+
+        action_value = mu.unsqueeze( -1 )
+        L = torch.zeros(( x.shape[0], self.output_dims, self.output_dims ) )
+        tril_indices = torch.tril_indices( row=self.output_dims, col=self.output_dims, offset=0 )
+        L[:, tril_indices[0], tril_indices[1]] = entries
+        L.diagonal( dim1=1, dim2=2 ).exp_()
+        P = L*L.transpose( 2, 1 )
+        Q = None
+        dist = MultivariateNormal( action_value.squeeze( -1 ), torch.inverse( P ) )
+        action = torch.clamp( dist.sample(), min=-6.28, max=6.28 )
+        A = (-0.5 * torch.matmul( torch.matmul(( action.unsqueeze(-1) - action_value ).transpose(2, 1), P ), (action.unsqueeze( -1 ) - action_value ) ) ).squeeze(-1)
+        Q = A + V
+
+        dist = MultivariateNormal( action_value.squeeze( -1 ), torch.inverse( P ) )
+
+        return action_value, dist, Q, V
+
+    def getDistribution( self, x ):
+        mu = self.forward( x )
+        dist = torch.distributions.Normal( mu, torch.full( mu.shape, self._sigma ) )
+        return dist
