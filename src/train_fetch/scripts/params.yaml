@@ -23,8 +23,8 @@ arm_constants:
 
 reward_constants:
         box_threshold: 0.1
-        goal_distance_constant: 5
-        cube_distance_constant: 5
-        distance_moved_constant: 5
+        goal_distance_constant: 1
+        cube_distance_constant: 0.2
+        distance_moved_constant: 0.5
         collision_constant: 50
         done_constant: 100

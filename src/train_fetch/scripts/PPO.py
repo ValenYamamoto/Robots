@@ -3,6 +3,8 @@ import numpy as np
 import utils
 import rospy
 
+from NAF import getTargetValues
+
 
 GAMMA = 0.99
 LAMBDA = 0.95
@@ -87,7 +89,7 @@ def distance_moved_reward_function( current_distance, last_distance ):
                 return abs( current_distance - last_position )
                 
 
-def ppo_train_loop( arm_controller, model_actor, model_critic, params, joint_data, link_data, move_model, logfilename ):
+def ppo_train_loop( arm_controller, model, params, joint_data, link_data, move_model, logfilename ):
                 # set up loss function and optimizers
                 critic_mse = torch.nn.MSELoss()
                 actor_optimizer = torch.optim.Adam( model_actor.parameters(), lr=params['params']['actor_lr'] )
@@ -114,10 +116,10 @@ def ppo_train_loop( arm_controller, model_actor, model_critic, params, joint_dat
 
                                                 # get current position + get action
                                                 current_state_tensor = torch.tensor( current_state.reshape( (1, params['params']['num_joints']) ) )
-                                                mu = model_actor( current_state_tensor )
+                                                mu = model( current_state_tensor )
 
                                                 # get action by sampling Distribution
-                                                dist = model_actor.getDistribution( current_state_tensor )
+                                                dist = model.getDistribution( current_state_tensor )
                                                 action = dist.sample()
                                                 action = torch.clamp( action, min=-6.28, max=6.18 )
                                                 action_prob = dist.log_prob( action )
@@ -127,7 +129,7 @@ def ppo_train_loop( arm_controller, model_actor, model_critic, params, joint_dat
 
 
                                                 # get Q value
-                                                q_value = model_critic( current_state_tensor )
+                                                value = model.getValue( current_state_tensor, action )
                                                 log_string += f"\tq_value: {q_value}\n"
 
                                                 # move arm
@@ -157,7 +159,7 @@ def ppo_train_loop( arm_controller, model_actor, model_critic, params, joint_dat
                                                 entropies.append( entropy )
                                                 old_probs.append( old_prob )
                                                 action_probs.append( action_prob )
-                                                values.append( q_value )
+                                                values.append( value )
                                                 masks.append( mask )
                                                 rewards.append( reward )
                                                 
@@ -177,13 +179,14 @@ def ppo_train_loop( arm_controller, model_actor, model_critic, params, joint_dat
                                                 open_file.close()
 
 
-                                # get last q_value
-                                q_value = model_critic( current_state_tensor )
-                                values.append( q_value )
+                                # get last value
+                                value = model.getValue( current_state_tensor, action )
+                                values.append( value )
 
                                 # calculate advantages
                                 returns, advantages = get_advantages( values, masks, rewards )
-
+                                if NAF:
+                                                returns = torch.reshape( getTargetValues( rewards, values, masks ) )
 
                                 # reshape everything to same size
                                 entropies = torch.mean( torch.reshape( torch.stack( entropies, dim=1 ), (-1, params['params']['num_joints']) ), dim=1, keepdim=True )

@@ -23,14 +23,14 @@ class ActorCriticModel( torch.nn.Module ):
 	def getDistribution( self, x ):
 		return self.actor.getDistribution( x )
 	
-	def getQValue( self, x, action ):
+	def getValue( self, x, action ):
 		return self.critic( x )
 
-    def decayStdDev( self, min_std_dev ):
+        def decayStdDev( self, min_std_dev ):
 		self.actor.decayStdDev( min_std_dev )
     
-    def setStdDev( self, std ):
-        self.actor.setStdDev( std )
+        def setStdDev( self, std ):
+                self.actor.setStdDev( std )
 
 
 class ActorModel( torch.nn.Module ):
@@ -152,16 +152,20 @@ class NAFModel( torch.nn.Module ):
 
         dist = MultivariateNormal( action_value.squeeze( -1 ), torch.inverse( P ) )
 
-        return action_value, dist, Q
+        return action_value, dist, Q, V
 	
 	def forward( self, x ):
-		action, _, _ = self.forward_prop( self, x )
+		action, _, _, _ = self.forward_prop( self, x )
 		return action
 
-    def getDistribution( self, x, action ):
-        _, dist, _ = self.forward_prop( x, action )
+        def getDistribution( self, x, action ):
+                _, dist, _, _ = self.forward_prop( x, action )
 		return dist
 
-    def getQValue( self, x, action ):
-        _, _, Q = self.forward_prop( x, action )
+        def getQValue( self, x, action ):
+                _, _, Q, _ = self.forward_prop( x, action )
 		return Q
+
+        def getValue( self, x, action ):
+                _, _, _, V = self.forward_prop( x, action )
+		return V
