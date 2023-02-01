@@ -14,7 +14,7 @@
 #     * Neither the name of the Fetch Robotics Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -32,16 +32,25 @@ import sys
 
 import rospy
 import actionlib
-from control_msgs.msg import (FollowJointTrajectoryAction,
-                              FollowJointTrajectoryGoal,
-                              GripperCommandAction,
-                              GripperCommandGoal)
+from control_msgs.msg import (
+    FollowJointTrajectoryAction,
+    FollowJointTrajectoryGoal,
+    GripperCommandAction,
+    GripperCommandGoal,
+)
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
-arm_joint_names = ["shoulder_pan_joint", "shoulder_lift_joint", "upperarm_roll_joint",
-              "elbow_flex_joint", "forearm_roll_joint", "wrist_flex_joint", "wrist_roll_joint"]
-arm_intermediate_positions  = [1.32, 0, -1.4, 1.72, 0.0, 1.66, 0.0]
-arm_joint_positions  = [1.32, 1.40, -0.2, 1.72, 0.0, 1.66, 0.0]
+arm_joint_names = [
+    "shoulder_pan_joint",
+    "shoulder_lift_joint",
+    "upperarm_roll_joint",
+    "elbow_flex_joint",
+    "forearm_roll_joint",
+    "wrist_flex_joint",
+    "wrist_roll_joint",
+]
+arm_intermediate_positions = [1.32, 0, -1.4, 1.72, 0.0, 1.66, 0.0]
+arm_joint_positions = [1.32, 1.40, -0.2, 1.72, 0.0, 1.66, 0.0]
 
 head_joint_names = ["head_pan_joint", "head_tilt_joint"]
 head_joint_positions = [0.0, 0.0]
@@ -55,17 +64,23 @@ if __name__ == "__main__":
         sys.exit(-1)
 
     rospy.loginfo("Waiting for head_controller...")
-    head_client = actionlib.SimpleActionClient("head_controller/follow_joint_trajectory", FollowJointTrajectoryAction)
+    head_client = actionlib.SimpleActionClient(
+        "head_controller/follow_joint_trajectory", FollowJointTrajectoryAction
+    )
     head_client.wait_for_server()
     rospy.loginfo("...connected.")
 
     rospy.loginfo("Waiting for arm_controller...")
-    arm_client = actionlib.SimpleActionClient("arm_controller/follow_joint_trajectory", FollowJointTrajectoryAction)
+    arm_client = actionlib.SimpleActionClient(
+        "arm_controller/follow_joint_trajectory", FollowJointTrajectoryAction
+    )
     arm_client.wait_for_server()
     rospy.loginfo("...connected.")
 
     rospy.loginfo("Waiting for gripper_controller...")
-    gripper_client = actionlib.SimpleActionClient("gripper_controller/gripper_action", GripperCommandAction)
+    gripper_client = actionlib.SimpleActionClient(
+        "gripper_controller/gripper_action", GripperCommandAction
+    )
     gripper_client.wait_for_server()
     rospy.loginfo("...connected.")
 
